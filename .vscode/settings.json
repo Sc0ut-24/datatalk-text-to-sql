@@ -1,0 +1,9 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd '/Users/muhammadsulaiman/Documents/DataTalk/untitled folder' && node -e \"require\\('dotenv'\\)\\.config\\(\\); console\\.log\\('API Key read:', process\\.env\\.ANTHROPIC_API_KEY \\? process\\.env\\.ANTHROPIC_API_KEY\\.slice\\(0, 20\\) \\+ '\\.\\.\\.' : 'NOT SET'\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "npm install": true
+    }
+}

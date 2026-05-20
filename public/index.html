@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataTalk - Text-to-SQL</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🗣️ DataTalk</h1>
+      <p class="subtitle">Ask AWAY</p>
+    </header>
+
+    <main>
+      <div class="input-section">
+        <div class="form-group">
+          <label for="query">What Trading Information do you need?</label>
+          <textarea
+            id="query"
+            placeholder="e.g., 'Show me all pending orders for AAPL and TSLA in the last 7 days'"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="button-group">
+          <button id="executeBtn" class="btn btn-primary">Execute Query</button>
+          <button id="sqlOnlyBtn" class="btn btn-secondary">Show SQL Only</button>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+          <span class="spinner"></span> Processing...
+        </div>
+      </div>
+
+      <div class="results-section">
+        <div id="error" class="error-box" style="display: none;"></div>
+
+        <div id="sqlResult" class="result-panel" style="display: none;">
+          <h3>Generated SQL</h3>
+          <pre id="sqlCode"><code></code></pre>
+          <button class="copy-btn" onclick="copySql()">📋 Copy SQL</button>
+        </div>
+
+        <div id="tableResult" class="result-panel" style="display: none;">
+          <h3>Query Results</h3>
+          <div id="tableContainer"></div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <p>Enter a natural language query and click "Execute Query" to see results</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Powered by your one & only Sulaiman</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
