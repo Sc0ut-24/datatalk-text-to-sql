@@ -15,8 +15,25 @@ async function loadDatabase(): Promise<any> {
     fs.mkdirSync(DB_DIR, { recursive: true });
   }
 
+  // Resolve sql.js package location
   const sqlJsRoot = path.dirname(require.resolve("sql.js"));
-  const SQL = await initSqlJs({ locateFile: (file: string) => path.join(sqlJsRoot, file) });
+  
+  // Construct path to WASM file with fallback for different environments
+  const wasmFileName = "sql-wasm.wasm";
+  const getWasmPath = (file: string) => {
+    // Try dist subdirectory first (standard sql.js layout)
+    const distPath = path.join(sqlJsRoot, "dist", file);
+    if (fs.existsSync(distPath)) {
+      return distPath;
+    }
+    // Fallback to root directory
+    const rootPath = path.join(sqlJsRoot, file);
+    return rootPath;
+  };
+
+  const SQL = await initSqlJs({ 
+    locateFile: getWasmPath
+  });
   const data = fs.existsSync(DB_PATH) ? fs.readFileSync(DB_PATH) : undefined;
   const db = data ? new SQL.Database(data) : new SQL.Database();
   cachedDb = db;
